@@ -14,17 +14,31 @@
     },
     "android": {
       "package": "com.darjaflow.app",
-      "permissions": ["RECORD_AUDIO"]
+      "permissions": [
+        "RECORD_AUDIO",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS"
+      ]
     },
     "plugins": [
       "expo-router",
-      ["expo-av", {
-        "microphonePermission": "Darja Flow needs microphone access to transcribe your voice."
-      }]
+      [
+        "expo-av",
+        {
+          "microphonePermission": "Darja Flow needs microphone access to transcribe your voice."
+        }
+      ],
+      "expo-font"
     ],
     "scheme": "darja-flow",
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "0d70fbc1-4415-4baf-9584-321d4f237032"
+      }
     }
   }
 }
