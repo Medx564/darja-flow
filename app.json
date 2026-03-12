@@ -1,0 +1,30 @@
+{
+  "expo": {
+    "name": "Darja Flow",
+    "slug": "darja-flow",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.darjaflow.app",
+      "infoPlist": {
+        "NSMicrophoneUsageDescription": "Darja Flow needs microphone access to transcribe your voice into Tunisian Arabic text."
+      }
+    },
+    "android": {
+      "package": "com.darjaflow.app",
+      "permissions": ["RECORD_AUDIO"]
+    },
+    "plugins": [
+      "expo-router",
+      ["expo-av", {
+        "microphonePermission": "Darja Flow needs microphone access to transcribe your voice."
+      }]
+    ],
+    "scheme": "darja-flow",
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
