@@ -24,10 +24,10 @@ export async function transcribeAudio(audioUri: string): Promise<string> {
     byteNumbers[i] = byteCharacters.charCodeAt(i);
   }
   const byteArray = new Uint8Array(byteNumbers);
-  const blob = new Blob([byteArray], { type: 'audio/m4a' });
+  const blob = new Blob([byteArray], { type: 'audio/wav' });
 
   const formData = new FormData();
-  formData.append('file', blob as any, 'recording.m4a');
+  formData.append('file', blob as any, 'recording.wav');
   formData.append('model', 'whisper-large-v3');
   formData.append('language', languageHint.split(',')[0]);
   formData.append('response_format', 'json');

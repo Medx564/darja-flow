@@ -16,9 +16,27 @@ export function useRecording() {
         playsInSilentModeIOS: true,
       });
 
-      const { recording } = await Audio.Recording.createAsync(
-        Audio.RecordingOptionsPresets.HIGH_QUALITY
-      );
+      const { recording } = await Audio.Recording.createAsync({
+        android: {
+          extension: '.wav',
+          outputFormat: Audio.AndroidOutputFormat.DEFAULT,
+          audioEncoder: Audio.AndroidAudioEncoder.DEFAULT,
+          sampleRate: 16000,
+          numberOfChannels: 1,
+          bitRate: 128000,
+        },
+        ios: {
+          extension: '.wav',
+          audioQuality: Audio.IOSAudioQuality.HIGH,
+          sampleRate: 16000,
+          numberOfChannels: 1,
+          bitRate: 128000,
+          linearPCMBitDepth: 16,
+          linearPCMIsBigEndian: false,
+          linearPCMIsFloat: false,
+        },
+        web: {},
+      });
 
       recordingRef.current = recording;
       setIsRecording(true);
