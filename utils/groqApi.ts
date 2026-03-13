@@ -23,7 +23,7 @@ export async function transcribeAudio(audioUri: string): Promise<string> {
   formData.append('model', 'whisper-large-v3-turbo');
   formData.append('language', languageHint.split(',')[0]);
   formData.append('response_format', 'json');
-  formData.append('prompt', 'هذا تسجيل بالدارجة التونسية. الكلام بالعربي التونسي العامي.');
+  formData.append('prompt', 'تونس. دارجة تونسية عامة. الكلام مزيج من العربية التونسية والفرنسية. كلمات شائعة: برشا، مليح، يزي، بالحق، نحب، مانيش، فما، باهي، عادي، مزيان، صحيح، كيفاش، علاش، وقتاش، فين، شكون، اشنو، حبيبي، ولد، بنت، خويا، صاحبي، الدار، الخدمة، المدرسة، نروح، نجي، نكل، نشرب، نقرا، نخدم. فرنسي مدمج: نورمال، ديركتمون، بونجور، سيريو، كلير، أوكي، ووي، نون، بارفي، مرسي، سيلفوبلي، آلو، بيساج، فاميي، آمي، تراباي، إيكول. أرقام وتواريخ بالعربي والفرنسي. اكتب الكلمات التونسية كما تُنطق بالعربية.');;
 
   const response = await fetch('https://api.groq.com/openai/v1/audio/transcriptions', {
     method: 'POST',
