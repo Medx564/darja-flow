@@ -20,7 +20,7 @@ export async function transcribeAudio(audioUri: string): Promise<string> {
     type: 'audio/wav',
     name: 'recording.wav',
   } as any);
-  formData.append('model', 'whisper-large-v3');
+  formData.append('model', 'whisper-large-v3-turbo');
   formData.append('language', languageHint.split(',')[0]);
   formData.append('response_format', 'json');
   formData.append('prompt', 'هذا تسجيل بالدارجة التونسية. الكلام بالعربي التونسي العامي.');
