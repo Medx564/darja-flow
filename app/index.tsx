@@ -68,12 +68,12 @@ export default function HomeScreen() {
         fadeIn();
         setStatusMsg('اضغط للتسجيل');
         addEntry(result);
-      } catch (err: any) {
-        if (err.message?.includes('API_KEY')) {
-          setShowApiModal(true);
-        } else {
-          Alert.alert('خطأ', 'فشل التحويل. حاول مرة أخرى.');
-        }
+ } catch (err: any) {
+if (err.message?.includes('API_KEY')) {
+    setShowApiModal(true);
+  } else {
+    Alert.alert('خطأ', err.message || 'فشل التحويل. حاول مرة أخرى.');
+  }
         setStatusMsg('اضغط للتسجيل');
       } finally {
         setIsTranscribing(false);
