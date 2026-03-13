@@ -14,20 +14,12 @@ export async function transcribeAudio(audioUri: string): Promise<string> {
   const apiKey = await getApiKey();
   const languageHint = (await AsyncStorage.getItem(LANGUAGE_HINT_KEY)) || 'ar';
 
-  const base64 = await FileSystem.readAsStringAsync(audioUri, {
-    encoding: FileSystem.EncodingType.Base64,
-  });
-
-  const byteCharacters = atob(base64);
-  const byteNumbers = new Array(byteCharacters.length);
-  for (let i = 0; i < byteCharacters.length; i++) {
-    byteNumbers[i] = byteCharacters.charCodeAt(i);
-  }
-  const byteArray = new Uint8Array(byteNumbers);
-  const blob = new Blob([byteArray], { type: 'audio/wav' });
-
   const formData = new FormData();
-  formData.append('file', blob as any, 'recording.wav');
+  formData.append('file', {
+    uri: audioUri,
+    type: 'audio/wav',
+    name: 'recording.wav',
+  } as any);
   formData.append('model', 'whisper-large-v3');
   formData.append('language', languageHint.split(',')[0]);
   formData.append('response_format', 'json');
@@ -42,7 +34,7 @@ export async function transcribeAudio(audioUri: string): Promise<string> {
   if (!response.ok) {
     const err = await response.json().catch(() => ({}));
     if (response.status === 401) throw new Error('API_KEY_INVALID');
-    throw new Error(err?.error?.message || `HTTP ${response.status}`);
+    throw new Error(JSON.stringify(err) + ` HTTP ${response.status}`);
   }
 
   const data = await response.json();
